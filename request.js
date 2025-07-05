@@ -12,6 +12,14 @@ module.exports = function(RED) {
                 if(this.server.hP()[config.name]!==undefined) {
                     register = this.server.hP()[config.name]
                 }
+                
+                if(config.name===undefined || config.name=="") {
+                    register = msg.topic
+                    if(this.server.hP()[msg.topic]!==undefined) {
+                        register = this.server.hP()[msg.topic]
+                    }
+                }
+                
                 if(register.toLowerCase()=="astro") {
                     timer = setTimeout(() => {
                         this.status({ fill: 'yellow', shape: 'dot', text: `` });
